@@ -2,11 +2,11 @@
 
 Recruiter-facing RAG for [Jeet Nath](https://github.com/Jetty53): ingest documents into Postgres + pgvector, retrieve with hybrid search, and answer in chat as **Jena**.
 
-| Folder | Role | Default URL |
-| --- | --- | --- |
-| `frontend/` | React (Vite) chat + site | http://127.0.0.1:5173 |
-| `ingestor/` | FastAPI upload → parse → chunk → embed → R2 | http://127.0.0.1:8000 |
-| `retriever/` | FastAPI ask / SSE stream | http://127.0.0.1:8001 |
+| Folder | Role |
+| --- | --- |
+| `frontend/` | React (Vite) chat + site |
+| `ingestor/` | FastAPI upload → parse → chunk → embed → R2 |
+| `retriever/` | FastAPI ask / SSE stream |
 
 Copy each `*.env.example` to `.env` and fill Gemini (and R2 for ingest). Do not commit `.env`.
 
@@ -23,7 +23,7 @@ Copy each `*.env.example` to `.env` and fill Gemini (and R2 for ingest). Do not 
 cd ingestor
 python -m pip install -r requirements.txt
 # start Postgres+pgvector (see docker-compose.yml)
-python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+python -m uvicorn app.main:app
 ```
 
 ```http
@@ -43,7 +43,7 @@ Pipeline: stage R2 → SHA-256 dedup → parse → semantic chunks (filename pre
 ```powershell
 cd retriever
 python -m pip install -r requirements.txt
-python -m uvicorn app.main:app --host 127.0.0.1 --port 8001
+python -m uvicorn app.main:app
 ```
 
 Same `DATABASE_URL` and `GEMINI_API_KEY` as ingest.
