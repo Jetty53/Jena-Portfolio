@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: jena
+      POSTGRES_PASSWORD: jena
+      POSTGRES_DB: jena
+    ports:
+      - "5432:5432"
+    volumes:
+      - jena_pg:/var/lib/postgresql/data
+      - ./sql/001_init.sql:/docker-entrypoint-initdb.d/001_init.sql
+
+volumes:
+  jena_pg:
